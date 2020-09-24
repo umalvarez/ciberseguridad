@@ -361,14 +361,14 @@ for i in range(0, numurls):
 print("\nNikto")
 print("============================================================================")
 for i in range(0, numurls):
-    print("nikto "+ evnik +" -h " + arr_urls[i])
+    print("nikto -useragent Mozilla\/5\.0 "+ evnik +" -h " + arr_urls[i])
     #cmd_nikto = "nikto -h "+ arr_urls[i]
     #returned_value_nikto = os.system(cmd_nikto)
     #print('returned value:', returned_value_nikto)
     try:
         t = str(time.ctime())
         print(t)
-        run_command("nikto "+ evnik +" -h " + arr_urls[i])
+        run_command("nikto -useragent Mozilla\/5\.0 "+ evnik +" -h " + arr_urls[i])
 #        out = subprocess.check_output("nikto -h "+ arr_urls[i], shell=True)
 #        out = out.decode("utf-8")
 #        print(t)
