@@ -183,7 +183,7 @@ if popc_ptsnmap == '1':
     ptsnmap = "-p-"
 else:
     # Puertos especificos
-    ptsnmap = input(cgris + "Escriba el puerto a escanear o los puertos a escanear separados por comas por ejemplo 80,443,22:\n" + cend)
+    ptsnmap = input("Escriba el puerto a escanear o los puertos a escanear separados por comas por ejemplo 80,443,22:\n" + cend)
     ptsnmap = "-p " + ptsnmap
 
 ##ptsnmap = "-p-" # DEBUG
