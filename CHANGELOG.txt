@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2020-10-01
+## 2020-10-02
 
-* Se elimina la mayoría de las líneas de código que estaban comentadas y sin uso en el script.  
-* Se cambia el nombre de la variable, "pip", a "pinput".  
+* Se agrega bitácora de cambios de SecurityScan.py.  
+* Se agrega bitácora de cambios de repositorio.  
