@@ -62,8 +62,6 @@ def switch(opevnik):
 # \033[cod_formato;cod_color_texto;cod_color_fondom
 # Tabla de colores: for COLOR in {1..255}; do echo -en "\e[38;5;${COLOR}m${COLOR} "; done; echo;
 crojo = "\033[1;31m"
-#ccyan = "\033[0;36m"
-#cgris = "\033[1;244m"
 cend = '\033[0;m'
 
 # Variables
@@ -82,7 +80,7 @@ if not path.exists(dirscan):
 # Sistema
 psist = input("Nombre de Sistema sin espacios ?\n")
 print ("\t")
-#psist = "rh" # DEBUG
+
 # Archivo de Analisis
 from datetime import datetime
 ahora = datetime.now()
@@ -137,9 +135,8 @@ def menuevnikto():
 # |--- Preguntas ---|
 
 # Ip/Dominio sistema
-pip = input("Coloque la ip del sistema ó dominio del sistema a analizar sin el protocolo HTTP/HTTPS:\n")
+pinput = input("Coloque la ip del sistema ó dominio del sistema a analizar sin el protocolo HTTP/HTTPS:\n")
 print ("\t")
-#pip = "172.43.1.140" # DEBUG
 
 # Puertos
 #numptos = int(input('Numero de puertos donde se ejecuta el sistema ?:\n '))
@@ -210,7 +207,7 @@ print("#########################################################################
 print("Analisis de Seguridad del sistema " + psist)
 print("Realizado el dia " + str(dia) + "/" + str(mes) + "/" + str(anio) + " a las " + hora + ":" + minutos + " hrs")
 print("Nombre del sistema: " + psist)
-print("Ip/Dominio del sistema: " + pip)
+print("Ip/Dominio del sistema: " + pinput)
 print ("Cantidad de Url(s): " + str(numurls) ,str(arr_urls))
 print ("Puerto(s) Nmap: " + ptsnmap)
 
@@ -225,14 +222,14 @@ print("Iniciando Analisis de Seguridad...\n")
 # Ssl-enum-ciphers
 print("\nNmap Ssl-enum-ciphers")
 print("============================================================================")
-print("nmap -sV --script ssl-enum-ciphers "+ ptsnmap + " " + pip)
+print("nmap -sV --script ssl-enum-ciphers "+ ptsnmap + " " + pinput)
 #cmd_nmap_ciphers = "nmap -sV --script ssl-enum-ciphers "+ ptsnmap + " " + pip
 #returned_value_ciphers = os.system(cmd_nmap_ciphers)
 #print('returned value:', returned_value_ciphers)
 try:
     t = str(time.ctime())
     print(t)
-    run_command("nmap -sV --script ssl-enum-ciphers "+ ptsnmap + " " + pip)
+    run_command("nmap -sV --script ssl-enum-ciphers "+ ptsnmap + " " + pinput)
     #out = subprocess.check_output(['nmap',  '-sV', '--script','ssl-enum-ciphers',ptsnmap,pip])
     #msg = "{t}\nChecking for connected devices:\n{out}".format(t=t, out=out)
     ##out = subprocess.check_output("nmap -sV --script ssl-enum-ciphers "+ ptsnmap + " " + pip, shell=True)
@@ -250,14 +247,14 @@ except subprocess.CalledProcessError as cmdexc:
 # Nmap scan
 print("\nNmap Scan")
 print("============================================================================")
-print("nmap -A -T4 -Pn --script=ssl-enum-ciphers,http-security-headers,http-waf-detect,vuln "+ ptsnmap + " " + pip)
+print("nmap -A -T4 -Pn --script=ssl-enum-ciphers,http-security-headers,http-waf-detect,vuln "+ ptsnmap + " " + pinput)
 #cmd_nmap = "nmap -A -T4 -Pn "+ ptsnmap + " " + pip"
 #returned_value_nmap = os.system(cmd_nmap)
 #print('returned value:', returned_value_nmap)
 try:
     t = str(time.ctime())
     print(t)
-    run_command("nmap -A -T4 -Pn --script=ssl-enum-ciphers,http-security-headers,http-waf-detect,vuln "+ ptsnmap + " " + pip)
+    run_command("nmap -A -T4 -Pn --script=ssl-enum-ciphers,http-security-headers,http-waf-detect,vuln "+ ptsnmap + " " + pinput)
     ##out = subprocess.check_output("nmap -A -T4 -Pn "+ ptsnmap + " " + pip, shell=True)
     ##out = out.decode("utf-8")
     ##print(t)
