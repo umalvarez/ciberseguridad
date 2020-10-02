@@ -1,4 +1,4 @@
-# CHANGELOG
+# CHANGELOG SecurityScan.py
 
 ## 2020-10-01
 
