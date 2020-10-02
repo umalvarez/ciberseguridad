@@ -5,7 +5,7 @@
 # Execute the script on Kali Linux
 # Basic code developer for Gobierno del Estado de Queretaro
 
-# Copyright (c) 2020, Marco antonio Martínez García
+# Copyright (c) 2020, Marco Antonio Martínez García
 # Copyright (c) 2020, Ulises M. Alvarez
 # All rights reserved.
 
