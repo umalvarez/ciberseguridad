@@ -6,8 +6,19 @@
 # Basic code developer for Gobierno del Estado de Queretaro
 
 # Copyright (c) 2020, Marco Antonio Martínez García
-# Copyright (c) 2020, Ulises M. Alvarez
+# Copyright (c) 2020, 2021, Ulises M. Alvarez
 # All rights reserved.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # Librerias
 import sys, os, subprocess, time, shlex
@@ -62,8 +73,6 @@ def switch(opevnik):
 # \033[cod_formato;cod_color_texto;cod_color_fondom
 # Tabla de colores: for COLOR in {1..255}; do echo -en "\e[38;5;${COLOR}m${COLOR} "; done; echo;
 crojo = "\033[1;31m"
-#ccyan = "\033[0;36m"
-#cgris = "\033[1;244m"
 cend = '\033[0;m'
 
 # Variables
@@ -82,7 +91,7 @@ if not path.exists(dirscan):
 # Sistema
 psist = input("Nombre de Sistema sin espacios ?\n")
 print ("\t")
-#psist = "rh" # DEBUG
+
 # Archivo de Analisis
 from datetime import datetime
 ahora = datetime.now()
@@ -137,16 +146,8 @@ def menuevnikto():
 # |--- Preguntas ---|
 
 # Ip/Dominio sistema
-pip = input("Coloque la ip del sistema ó dominio del sistema a analizar sin el protocolo HTTP/HTTPS:\n")
+pinput = input("Coloque la ip del sistema ó dominio del sistema a analizar sin el protocolo HTTP/HTTPS:\n")
 print ("\t")
-#pip = "172.43.1.140" # DEBUG
-
-# Puertos
-#numptos = int(input('Numero de puertos donde se ejecuta el sistema ?:\n '))
-#for i in range(1, numptos+1):
-#    print('Escribe el puerto numero ', i, ': ')
-#    n = str(input())
-#    arr_ptos.append(n)
 
 # Urls
 numurls = int(input('Cuantas Urls vas a analizar del servidor: '))
@@ -157,7 +158,6 @@ for i in range(1, numurls+1):
     arr_urls.append(n)
 print ("\t")
 #numurls = 1 # DEBUG
-#arr_urls.append("http://172.43.1.140/digitalizacion/") # DEBUG
 
 # Tipo de analisis
 while True:
@@ -210,7 +210,7 @@ print("#########################################################################
 print("Analisis de Seguridad del sistema " + psist)
 print("Realizado el dia " + str(dia) + "/" + str(mes) + "/" + str(anio) + " a las " + hora + ":" + minutos + " hrs")
 print("Nombre del sistema: " + psist)
-print("Ip/Dominio del sistema: " + pip)
+print("Ip/Dominio del sistema: " + pinput)
 print ("Cantidad de Url(s): " + str(numurls) ,str(arr_urls))
 print ("Puerto(s) Nmap: " + ptsnmap)
 
@@ -220,104 +220,25 @@ print("#########################################################################
 print("Iniciando Analisis de Seguridad...\n")
 
 # SERVIDOR
-# Ejecucion de comandos nmap
-"""
-# Ssl-enum-ciphers
-print("\nNmap Ssl-enum-ciphers")
-print("============================================================================")
-print("nmap -sV --script ssl-enum-ciphers "+ ptsnmap + " " + pip)
-#cmd_nmap_ciphers = "nmap -sV --script ssl-enum-ciphers "+ ptsnmap + " " + pip
-#returned_value_ciphers = os.system(cmd_nmap_ciphers)
-#print('returned value:', returned_value_ciphers)
-try:
-    t = str(time.ctime())
-    print(t)
-    run_command("nmap -sV --script ssl-enum-ciphers "+ ptsnmap + " " + pip)
-    #out = subprocess.check_output(['nmap',  '-sV', '--script','ssl-enum-ciphers',ptsnmap,pip])
-    #msg = "{t}\nChecking for connected devices:\n{out}".format(t=t, out=out)
-    ##out = subprocess.check_output("nmap -sV --script ssl-enum-ciphers "+ ptsnmap + " " + pip, shell=True)
-    #print(type(out))
-    ##out = out.decode("utf-8")
-    #print(type(out))
-    ##print(t)
-    ##print(out)
-    #f.write(t)
-    #f.write(out)
-except subprocess.CalledProcessError as cmdexc:
-    print ("Error code:", cmdexc.returncode, cmdexc.output)
-"""
+# Ejecucion de nmap
 
 # Nmap scan
 print("\nNmap Scan")
 print("============================================================================")
-print("nmap -A -T4 -Pn --script=ssl-enum-ciphers,http-security-headers,http-waf-detect,vuln "+ ptsnmap + " " + pip)
+print("nmap -A -T4 -Pn --script=ssl-enum-ciphers,http-security-headers,http-waf-detect,vuln "+ ptsnmap + " " + pinput)
 #cmd_nmap = "nmap -A -T4 -Pn "+ ptsnmap + " " + pip"
 #returned_value_nmap = os.system(cmd_nmap)
 #print('returned value:', returned_value_nmap)
 try:
     t = str(time.ctime())
     print(t)
-    run_command("nmap -A -T4 -Pn --script=ssl-enum-ciphers,http-security-headers,http-waf-detect,vuln "+ ptsnmap + " " + pip)
+    run_command("nmap -A -T4 -Pn --script=ssl-enum-ciphers,http-security-headers,http-waf-detect,vuln "+ ptsnmap + " " + pinput)
     ##out = subprocess.check_output("nmap -A -T4 -Pn "+ ptsnmap + " " + pip, shell=True)
     ##out = out.decode("utf-8")
     ##print(t)
     ##print(out)
 except subprocess.CalledProcessError as cmdexc:
     print ("Error code:", cmdexc.returncode, cmdexc.output)
-"""
-# Nmap scan
-print("\nNmap vulscan")
-print("============================================================================")
-print("nmap -sV --script=vulscan/vulscan.nse "+ pip)
-try:
-    t = str(time.ctime())
-    print(t)
-    run_command("nmap -sV --script=vulscan/vulscan.nse "+ pip)
-except subprocess.CalledProcessError as cmdexc:
-    print ("Error code:", cmdexc.returncode, cmdexc.output)
-
-# Nmap-vulners
-print("\nNmap vulners")
-print("============================================================================")
-print("nmap --script nmap-vulners -sV "+ pip)
-try:
-    t = str(time.ctime())
-    print(t)
-    run_command("nmap --script nmap-vulners -sV "+ pip)
-except subprocess.CalledProcessError as cmdexc:
-    print ("Error code:", cmdexc.returncode, cmdexc.output)
-
-# Nmap vuln
-print("\nNmap vuln")
-print("============================================================================")
-print("nmap -Pn --script vuln "+ pip)
-try:
-    t = str(time.ctime())
-    print(t)
-    run_command("nmap -Pn --script vuln "+ pip)
-except subprocess.CalledProcessError as cmdexc:
-    print ("Error code:", cmdexc.returncode, cmdexc.output)
-
-# SITIO URL
-# WAF
-print("\nWaf")
-print("============================================================================")
-for i in range(0, numurls):
-    print("wafw00f "+ arr_urls[i])
-    #cmd_waf = "wafw00f "+ arr_urls[i]
-    #returned_value_waf = os.system(cmd_waf)
-    #print('returned value:', returned_value_waf)
-    try:
-        t = str(time.ctime())
-        print(t)
-        run_command("wafw00f "+ arr_urls[i])
-        ##out = subprocess.check_output("wafw00f "+ arr_urls[i], shell=True)
-        ##out = out.decode("utf-8")
-        ##print(t)
-        ##print(out)
-    except subprocess.CalledProcessError as cmdexc:
-        print ("Error code:", cmdexc.returncode, cmdexc.output)
-"""
 
 # CURL
 print("\nCurl")
