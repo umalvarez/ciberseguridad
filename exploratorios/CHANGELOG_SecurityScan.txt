@@ -1,5 +1,10 @@
 # CHANGELOG SecurityScan.py
 
+## 2021-04-13
+
+* Se agrega la primera versión de un script para obtener correos electrónicos de páginas web.
+* Se promueve la rama de Desarrollo a rama Principal. Cambios menores.
+
 ## 2020-10-01
 
 * Se elimina la mayoría de las líneas de código que estaban comentadas y sin uso en el script.  
