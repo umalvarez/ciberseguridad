@@ -39,9 +39,11 @@ mes = '{:02d}'.format(ahora.month)
 dia = '{:02d}'.format(ahora.day)
 hora = '{:02d}'.format(ahora.hour)
 minutos = '{:02d}'.format(ahora.minute)
+segundos = '{:02d}'.format(ahora.second)
+
 # Fecha y Hora
 pfecha = str(anio) + str(mes) + str(dia)  # modified to 20210413
-phora = str(hora) + str(minutos)
+phora = str(hora) + str(minutos) + str(segundos)
 
 original_url = input("Enter the website url: ") 
 
